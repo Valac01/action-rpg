@@ -21,12 +21,13 @@ onready var animatedSprite = $AnimatedSprite
 func _ready():
 	animatedSprite.hide()
 
-func _process(_delta):
-	if Input.is_action_just_pressed("attack"):
-		$Sprite.queue_free()
-		animatedSprite.show()
-		animatedSprite.play("grassEffectAnimation")
-
-
 func _on_AnimatedSprite_animation_finished():
 	queue_free()
+
+func _on_Hurtbox_area_entered(_area):
+	destroy_grass()
+
+func destroy_grass():
+	$Sprite.queue_free()
+	animatedSprite.show()
+	animatedSprite.play("leavesFall")
